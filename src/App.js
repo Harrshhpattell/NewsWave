@@ -1,24 +1,42 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const categories = [
-  { name: "All news", id: 1 },
-  { name: "Top news", id: 2 },
-  { name: "Trending news", id: 3 },
-  { name: "Science", id: 4 },
-  { name: "Entertainment", id: 5 },
-  { name: "Sports", id: 6 },
-  { name: "Politics", id: 7 },
-  { name: "Business", id: 8 },
-  { name: "Technology", id: 9 },
-  { name: "Health", id: 10 },
-  { name: "World", id: 11 },
-  { name: "Environment", id: 12 },
-  { name: "Education", id: 13 },
-  { name: "Travel", id: 14 },
+  { name: "All news", id: 1, apiName: "all" },
+  // { name: "Top news", id: 2 },
+  // { name: "Trending news", id: 3 },
+  { name: "Science", id: 4, apiName: "science" },
+  { name: "Entertainment", id: 5, apiName: "entertainment" },
+  { name: "Sports", id: 6, apiName: "sports" },
+  { name: "Politics", id: 7, apiName: "politics" },
+  { name: "Business", id: 8, apiName: "business" },
+  { name: "Technology", id: 9, apiName: "technology" },
+  { name: "Health", id: 10, apiName: "health" },
+  { name: "World", id: 11, apiName: "world" },
+  { name: "Environment", id: 12, apiName: "environment" },
+  { name: "Education", id: 13, apiName: "education" },
+  { name: "Travel", id: 14, apiName: "travel" },
 ];
 
 function App() {
-  const [selectedCategory, setSelectedCategory] = useState("All news");
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [mydata, setMyData] = useState([]);
+  const apiget = (category) => {
+    fetch("https://inshortsapi.vercel.app/news?category=" + selectedCategory)
+      .then((response) => response.json())
+      .then((json) => {
+        console.log(json);
+        setMyData(json.data);
+      });
+  };
+
+  useEffect(() => {
+    apiget(selectedCategory); // Fetch data based on the selected category
+    const interval = setInterval(() => {
+      apiget(selectedCategory); // Fetch data based on the selected category
+    }, 50000);
+    return () => clearInterval(interval);
+  }, [selectedCategory]);
+
   return (
     <div className="app">
       <Navbar />
@@ -28,7 +46,7 @@ function App() {
           categories={categories}
           setSelectedCategory={setSelectedCategory}
         />
-        <NewsSection />
+        <NewsSection mydata={mydata} />
       </div>
     </div>
   );
@@ -64,46 +82,47 @@ function CategoriesList({ categories, selectedCategory, setSelectedCategory }) {
 function Category({ category, selectedCategory, onClick }) {
   return (
     <li
-      className={selectedCategory === category.name ? "active" : ""}
-      onClick={() => onClick(category.name)}
+      className={selectedCategory === category.apiName ? "active" : ""}
+      onClick={() => onClick(category.apiName)}
     >
       {category.name}
     </li>
   );
 }
 
-function NewsSection() {
+function NewsSection({ mydata }) {
   return (
     <div className="news">
-      <h2>All</h2>
+      <h2>(progess...)</h2>
       <div className="news-section">
         <ul>
-          <li>
-            <h3>
-              ICC releases revised schedule of ODI World Cup 2023, India-Pak
-              match now on October 14
-            </h3>
-            <p> by name / 11:45am on Wednesday, 9 August, 2023</p>
-            <div className="news-inside">
-              <div className="image">
-                <img
-                  src="https://static.inshorts.com/inshorts/images/v1/variants/jpg/m/2023/08_aug/9_wed/img_1691581122778_346.jpg?"
-                  alt=""
-                />
-              </div>
-              <p>
-                ICC has released revised schedule of ODI World Cup 2023, with
-                dates of nine matches being changed. India-Pakistan match will
-                now take place on October 14 instead of October 15 in Ahmedabad.
-                England-Afghanistan match in Delhi has been moved from October
-                14 to October 15. Pakistan-Sri Lanka match in Hyderabad has been
-                moved from October 12 to October 10.
-              </p>
-            </div>
-          </li>
+          {mydata.map((news) => (
+            <News news={news} key={news.id} />
+          ))}
         </ul>
       </div>
     </div>
+  );
+}
+
+function News({ news }) {
+  return (
+    <>
+      <li>
+        <h3>{news.title}</h3>
+        <p>
+          {" "}
+          by (news.author) / {news.time} on {news.date}
+        </p>
+        <div className="news-inside">
+          <div className="image">
+            <img src={news.imageUrl} alt="" />
+          </div>
+          <p>{news.content}</p>
+        </div>
+      </li>
+      <hr />
+    </>
   );
 }
 
