@@ -1,13 +1,105 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+html {
+  font-size: 16px;
+}
+
+/* Media queries for tablet */
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+/* Media queries for phone */
+@media (max-width: 480px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 0rem 2rem;
+  background-color: #333333;
+  color: #ffffff;
+  margin: 0;
+}
+.navbar button {
+  min-width: fit-content;
+  width: 10%;
+  margin: 1.2rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.main {
+  display: flex;
+}
+
+.main .category {
+  background-color: #f0f0f0;
+  width: 20%;
+  position: fixed;
+  top: 5.5rem;
+  left: 0;
+  bottom: 0;
+  overflow-y: scroll;
+}
+
+.main .category::-webkit-scrollbar {
+  width: 6px;
+}
+
+.main .category::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 3px;
+}
+
+.main .category h2 {
+  text-align: center;
+  color: #333333;
+  padding-top: 1rem;
+}
+
+.main .category ul {
+  padding: 0;
+}
+
+.main .category ul li {
+  list-style: none;
+  padding: 1rem;
+}
+.main .category ul li:hover {
+  background-color: #d1cfcf;
+  transition: all 0.5s;
+}
+
+.main .category ul .active {
+  transition: all 0.5s;
+  margin-left: 0.7rem;
+  border-radius: 5px 0 0 5px;
+  background-color: #ffffff;
+}
+
+.news {
+  flex: 1;
+  margin-left: 20%;
+  padding: 1rem;
+  background-color: #ffffff;
 }
