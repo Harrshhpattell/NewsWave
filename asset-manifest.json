@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/NewsWave/static/css/main.2fd4cfc0.css",
+    "main.js": "/NewsWave/static/js/main.8f7394a6.js",
+    "index.html": "/NewsWave/index.html",
+    "main.2fd4cfc0.css.map": "/NewsWave/static/css/main.2fd4cfc0.css.map",
+    "main.8f7394a6.js.map": "/NewsWave/static/js/main.8f7394a6.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2fd4cfc0.css",
+    "static/js/main.8f7394a6.js"
+  ]
+}
