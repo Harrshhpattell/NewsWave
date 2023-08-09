@@ -39,11 +39,14 @@ html {
   background-color: #333333;
   color: #ffffff;
   margin: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 .navbar button {
   min-width: fit-content;
-  width: 10%;
-  margin: 1.2rem;
+  width: 10rem;
+  margin: 1.2rem 3rem;
   border-radius: 5px;
   cursor: pointer;
 }
@@ -99,7 +102,121 @@ html {
 
 .news {
   flex: 1;
+  margin-top: 5rem;
   margin-left: 20%;
   padding: 1rem;
   background-color: #ffffff;
+}
+
+.news .news-section ul {
+  list-style: none;
+}
+
+.news .news-section ul li h3 {
+  font-size: 2.3rem;
+  color: #333333;
+  line-height: 2rem;
+}
+
+.news .news-section .news-inside {
+  display: grid;
+  grid-template-columns: 35% 55%;
+  gap: 2rem;
+  grid-template-rows: 20rem;
+}
+
+.news .news-section ul li .news-inside .image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.news-inside p {
+  font-size: 1.3rem;
+}
+
+@media (max-width: 1000px) {
+  .news .news-section .news-inside {
+    display: block;
+  }
+  .news .news-section ul li .news-inside .image img {
+    width: 100%;
+    height: 20rem;
+    object-fit: cover;
+  }
+}
+
+@media (max-width: 768px) {
+  .main .category {
+    width: 25%;
+  }
+  .news {
+    margin-left: 25%;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 0 1rem;
+  }
+  .navbar button {
+    min-width: fit-content;
+    width: 8rem;
+    margin: 1rem 2rem;
+    border-radius: 5px;
+  }
+  .main {
+    display: flex;
+  }
+  .main .category {
+    background-color: #f0f0f0;
+    width: 100%;
+    position: fixed;
+    top: 5.5rem;
+    left: 0;
+    bottom: auto;
+    overflow-x: scroll;
+  }
+
+  .main .category h2 {
+    display: none;
+  }
+  .main .category ul {
+    display: flex;
+  }
+  .main .category ul li {
+    flex-shrink: 0;
+  }
+  .main .category ul li:hover {
+    color: #333333;
+    background: #fff;
+  }
+  .main .category ul .active {
+    transition: all 0.5s;
+    border-radius: 25px;
+    background-color: #ffffff;
+  }
+  .news {
+    padding: 2rem;
+    background-color: aliceblue;
+    width: 100%;
+    margin: 10rem 0;
+  }
+
+  .news .news-section .news-inside {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .news .news-section ul {
+    padding: 0;
+  }
+  .news-inside img {
+    width: 100%;
+    height: 23rem;
+    border-radius: 20px;
+    object-fit: cover;
+  }
+  .news-inside p {
+    font-size: 1.5rem;
+  }
 }

@@ -28,14 +28,7 @@ function App() {
           categories={categories}
           setSelectedCategory={setSelectedCategory}
         />
-        <div className="news">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero
-          distinctio nostrum doloribus sit in odit eveniet reprehenderit saepe,
-          ipsam animi beatae facilis voluptatem eum officiis, quasi possimus quo
-          quisquam! Dolorem maiores sed, inventore quasi esse blanditiis
-          adipisci at numquam fugit excepturi eum dignissimos. Voluptate eius
-          sunt laboriosam earum natus rem.
-        </div>
+        <NewsSection />
       </div>
     </div>
   );
@@ -76,6 +69,41 @@ function Category({ category, selectedCategory, onClick }) {
     >
       {category.name}
     </li>
+  );
+}
+
+function NewsSection() {
+  return (
+    <div className="news">
+      <h2>All</h2>
+      <div className="news-section">
+        <ul>
+          <li>
+            <h3>
+              ICC releases revised schedule of ODI World Cup 2023, India-Pak
+              match now on October 14
+            </h3>
+            <p> by name / 11:45am on Wednesday, 9 August, 2023</p>
+            <div className="news-inside">
+              <div className="image">
+                <img
+                  src="https://static.inshorts.com/inshorts/images/v1/variants/jpg/m/2023/08_aug/9_wed/img_1691581122778_346.jpg?"
+                  alt=""
+                />
+              </div>
+              <p>
+                ICC has released revised schedule of ODI World Cup 2023, with
+                dates of nine matches being changed. India-Pakistan match will
+                now take place on October 14 instead of October 15 in Ahmedabad.
+                England-Afghanistan match in Delhi has been moved from October
+                14 to October 15. Pakistan-Sri Lanka match in Hyderabad has been
+                moved from October 12 to October 10.
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
   );
 }
 
