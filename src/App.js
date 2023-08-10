@@ -20,20 +20,23 @@ const categories = [
 function App() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [mydata, setMyData] = useState([]);
+  const [loading, setLoading] = useState(false);
   const apiget = (category) => {
+    setLoading(true);
     fetch("https://inshortsapi.vercel.app/news?category=" + selectedCategory)
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
         setMyData(json.data);
+        setLoading(false);
       });
   };
 
   useEffect(() => {
-    apiget(selectedCategory); // Fetch data based on the selected category
+    apiget(selectedCategory);
     const interval = setInterval(() => {
-      apiget(selectedCategory); // Fetch data based on the selected category
-    }, 50000);
+      apiget(selectedCategory);
+    }, 500000);
     return () => clearInterval(interval);
   }, [selectedCategory]);
 
@@ -45,8 +48,9 @@ function App() {
           selectedCategory={selectedCategory}
           categories={categories}
           setSelectedCategory={setSelectedCategory}
+          setMyData={setMyData}
         />
-        <NewsSection mydata={mydata} />
+        <NewsSection mydata={mydata} loading={loading} />
       </div>
     </div>
   );
@@ -67,7 +71,16 @@ function Navbar() {
   );
 }
 
-function CategoriesList({ categories, selectedCategory, setSelectedCategory }) {
+function CategoriesList({
+  categories,
+  selectedCategory,
+  setSelectedCategory,
+  setMyData,
+}) {
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category);
+    setMyData([]);
+  };
   return (
     <div className="category">
       <h2>Category</h2>
@@ -77,7 +90,7 @@ function CategoriesList({ categories, selectedCategory, setSelectedCategory }) {
             selectedCategory={selectedCategory}
             category={category}
             key={category.id}
-            onClick={setSelectedCategory}
+            onClick={handleCategoryClick}
           />
         ))}
       </ul>
@@ -96,15 +109,25 @@ function Category({ category, selectedCategory, onClick }) {
   );
 }
 
-function NewsSection({ mydata }) {
+function NewsSection({ mydata, loading }) {
   return (
     <div className="news">
-      <h2>(progess...)</h2>
       <div className="news-section">
         <ul>
-          {mydata.map((news) => (
-            <News news={news} key={news.id} />
-          ))}
+          {loading ? (
+            <p
+              style={{
+                fontWeight: 600,
+                textAlign: "center",
+                marginTop: "20rem",
+                fontSize: "2rem",
+              }}
+            >
+              Loading...
+            </p>
+          ) : (
+            mydata.map((news) => <News news={news} key={news.id} />)
+          )}
         </ul>
       </div>
     </div>
@@ -115,6 +138,7 @@ function News({ news }) {
   return (
     <>
       <li>
+        <button className="news-button">Latest</button>
         <h3>{news.title}</h3>
         <p className="author">
           by {news.author} / {news.time} on {news.date}
@@ -126,7 +150,6 @@ function News({ news }) {
           <p>{news.content}</p>
         </div>
       </li>
-      {/* <hr /> */}
     </>
   );
 }

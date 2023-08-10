@@ -42,6 +42,7 @@ html {
   position: fixed;
   top: 0;
   width: 100%;
+  z-index: 2;
 }
 
 .navbar a {
@@ -73,6 +74,7 @@ html {
   left: 0;
   bottom: 0;
   overflow-y: scroll;
+  z-index: 2;
 }
 
 .main .category::-webkit-scrollbar {
@@ -122,12 +124,32 @@ html {
   list-style: none;
 }
 
+.news-button {
+  background-color: #007bff;
+  position: absolute;
+  color: white;
+  border: none;
+
+  padding: 2.2rem 1rem 0.5rem 1rem;
+  z-index: 0;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-right: 1.5rem;
+  font-size: 1rem;
+  transform: translateY(-17px);
+}
+
+.news-button:hover {
+  background-color: #0056b3;
+}
+
 .news .news-section ul li h3 {
   font-size: 2rem;
   color: #333333;
-  line-height: 2.5rem;
   text-align: justify;
   margin-bottom: 0;
+  margin-top: 3rem;
 }
 
 .news .news-section .news-inside {
