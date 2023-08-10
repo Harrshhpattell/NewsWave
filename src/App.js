@@ -1,20 +1,92 @@
 import { useEffect, useState } from "react";
 
 const categories = [
-  { name: "All news", id: 1, apiName: "all" },
+  {
+    name: "All news",
+    id: 1,
+    apiName: "all",
+    icon: "fa-solid fa-fire",
+    iconHover: "fa-solid fa-fire fa-beat",
+  },
   // { name: "Top news", id: 2 },
   // { name: "Trending news", id: 3 },
-  { name: "Science", id: 4, apiName: "science" },
-  { name: "Entertainment", id: 5, apiName: "entertainment" },
-  { name: "Sports", id: 6, apiName: "sports" },
-  { name: "Politics", id: 7, apiName: "politics" },
-  { name: "Business", id: 8, apiName: "business" },
-  { name: "Technology", id: 9, apiName: "technology" },
-  { name: "Health", id: 10, apiName: "health" },
-  { name: "World", id: 11, apiName: "world" },
-  { name: "Environment", id: 12, apiName: "environment" },
-  { name: "Education", id: 13, apiName: "education" },
-  { name: "Travel", id: 14, apiName: "travel" },
+  {
+    name: "Science",
+    id: 4,
+    apiName: "science",
+    icon: "fa-regular fa-newspaper",
+    iconHover: "fa-regular fa-newspaper fa-beat",
+  },
+  {
+    name: "Entertainment",
+    id: 5,
+    apiName: "entertainment",
+    icon: "fa-regular fa-newspaper",
+    iconHover: "fa-regular fa-newspaper fa-beat",
+  },
+  {
+    name: "Sports",
+    id: 6,
+    apiName: "sports",
+    icon: "fa-solid fa-baseball-bat-ball",
+    iconHover: "fa-solid fa-baseball-bat-ball fa-beat",
+  },
+  {
+    name: "Politics",
+    id: 7,
+    apiName: "politics",
+    icon: "fa-solid fa-landmark",
+    iconHover: "fa-solid fa-landmark fa-beat",
+  },
+  {
+    name: "Business",
+    id: 8,
+    apiName: "business",
+    icon: "fa-solid fa-business-time",
+    iconHover: "fa-solid fa-business-time fa-beat",
+  },
+  {
+    name: "Technology",
+    id: 9,
+    apiName: "technology",
+    icon: "fa-solid fa-globe",
+    iconHover: "fa-solid fa-globe fa-beat",
+  },
+  {
+    name: "Health",
+    id: 10,
+    apiName: "health",
+    icon: "fa-solid fa-user-doctor",
+    iconHover: "fa-solid fa-user-doctor fa-beat",
+  },
+  {
+    name: "World",
+    id: 11,
+    apiName: "world",
+    icon: "fa-solid fa-globe",
+    iconHover: "fa-solid fa-globe fa-beat",
+  },
+  {
+    name: "Environment",
+    id: 12,
+    apiName: "environment",
+    icon: "fa-solid fa-seedling",
+    iconHover: "fa-solid fa-seedling fa-beat",
+  },
+  {
+    name: "Education",
+    id: 13,
+    apiName: "education",
+    icon: "fa-solid fa-school",
+    iconHover: "fa-solid fa-school fa-beat",
+  },
+  {
+    name: "Travel",
+    id: 14,
+    apiName: "travel",
+    icon: "fa-solid fa-route",
+    iconHover: "fa-solid fa-route fa-beat",
+  },
 ];
 
 function App() {
@@ -104,6 +176,14 @@ function Category({ category, selectedCategory, onClick }) {
       className={selectedCategory === category.apiName ? "active" : ""}
       onClick={() => onClick(category.apiName)}
     >
+      <i
+        className={
+          selectedCategory === category.apiName
+            ? category.iconHover
+            : category.icon
+        }
+        style={{ color: "#007bff" }}
+      ></i>{" "}
       {category.name}
     </li>
   );
@@ -138,7 +218,9 @@ function News({ news }) {
   return (
     <>
       <li>
-        <button className="news-button">Latest</button>
+        <button className="news-button">
+          <i class="fa-regular fa-newspaper fa-beat"></i> Latest
+        </button>
         <h3>{news.title}</h3>
         <p className="author">
           by {news.author} / {news.time} on {news.date}
