@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+import Navbar from "./components/Navbar";
+import CategoriesList from "./components/CategoriesList";
+import NewsSection from "./components/NewsSection";
 
 const categories = [
   {
@@ -125,114 +128,6 @@ function App() {
         <NewsSection mydata={mydata} loading={loading} />
       </div>
     </div>
-  );
-}
-
-function Navbar() {
-  return (
-    <div className="navbar">
-      <h1> 📰 NewsWave</h1>
-      <a
-        href={"https://github.com/Harrshhpattell"}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <button>Follow Me</button>
-      </a>
-    </div>
-  );
-}
-
-function CategoriesList({
-  categories,
-  selectedCategory,
-  setSelectedCategory,
-  setMyData,
-}) {
-  const handleCategoryClick = (category) => {
-    setSelectedCategory(category);
-    setMyData([]);
-  };
-  return (
-    <div className="category">
-      <h2>Category</h2>
-      <ul>
-        {categories.map((category) => (
-          <Category
-            selectedCategory={selectedCategory}
-            category={category}
-            key={category.id}
-            onClick={handleCategoryClick}
-          />
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-function Category({ category, selectedCategory, onClick }) {
-  return (
-    <li
-      className={selectedCategory === category.apiName ? "active" : ""}
-      onClick={() => onClick(category.apiName)}
-    >
-      <i
-        className={
-          selectedCategory === category.apiName
-            ? category.iconHover
-            : category.icon
-        }
-        style={{ color: "#007bff" }}
-      ></i>{" "}
-      {category.name}
-    </li>
-  );
-}
-
-function NewsSection({ mydata, loading }) {
-  return (
-    <div className="news">
-      <div className="news-section">
-        <ul>
-          {loading ? (
-            <p
-              style={{
-                fontWeight: 600,
-                textAlign: "center",
-                marginTop: "20rem",
-                fontSize: "2rem",
-              }}
-            >
-              Loading...
-            </p>
-          ) : (
-            mydata.map((news) => <News news={news} key={news.id} />)
-          )}
-        </ul>
-      </div>
-    </div>
-  );
-}
-
-function News({ news }) {
-  return (
-    <>
-      <li>
-        <button className="news-button">
-          <i class="fa-regular fa-newspaper fa-beat"></i> Latest
-        </button>
-        <h3>{news.title}</h3>
-        <p className="author">
-          by {news.author} / {news.time} on {news.date}
-        </p>
-        <div className="news-inside">
-          <div className="image">
-            <img src={news.imageUrl} alt="" />
-          </div>
-          <p>{news.content}</p>
-        </div>
-      </li>
-    </>
   );
 }
 
